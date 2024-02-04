@@ -2,22 +2,26 @@ import React from 'react';
 
 import './Card.css';
 
-export const Card = () => {
+export const Card = ({ id, imageUrl, price, title, isFavorite, isAdded, onClickAdd }) => {
   return (
     <div className='card-item'>
       <div className='card__top'>
-        <img className='card__fav' src="/svg/like-1.svg" alt="Unliked" />
-        <img className='card__img' src="/sneakers/sneakers-1.jpg" alt="Sneaker" />
+        <img className='card__fav' src={
+          isFavorite ? "/svg/like-2.svg" : "/svg/like-1.svg"
+        } alt="Unliked" />
+        <img className='card__img' src={imageUrl} alt="Sneaker" />
       </div>
       <p>
-        Мужские Кроссовки Nike Blazer Mid Suede
+        {title}
       </p>
       <div className='card__bottom'>
         <div className='card__bottom-price'>
           <span>Цена:</span>
-          <b>12 999 руб.</b>
+          <b>{price} руб.</b>
         </div>
-        <img className='card__add' src="/svg/plus.svg" alt="Plus" />
+        <img onClick={onClickAdd} className='card__add' src={
+          isAdded ? '/svg/checked.svg' : '/svg/plus.svg'
+        } alt="Plus" />
       </div>
     </div>
   );

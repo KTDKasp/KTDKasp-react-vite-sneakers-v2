@@ -1,0 +1,11 @@
+.search {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.content__h2 {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 39px;
+}

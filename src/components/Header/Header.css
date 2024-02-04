@@ -4,7 +4,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 43px 60px;
-  margin-bottom: 50px;
 }
 
 .header__left {
@@ -25,6 +24,7 @@
 
 .header__text p {
   opacity: 0.55;
+  font-size: 16px;
 }
 
 .header__right {
@@ -42,7 +42,7 @@
 
 .header__list-elem b {
   color: rgb(92, 92, 92);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 17px;
 }
@@ -53,7 +53,7 @@
 
 .header__list-elem span {
   color: rgb(92, 92, 92);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 17px;
 }

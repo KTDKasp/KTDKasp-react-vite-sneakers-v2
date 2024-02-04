@@ -10,6 +10,7 @@
   font-family: inherit;
   list-style: none;
   outline: none;
+  font-family: "Inter", system-ui;
 }
 
 img,
@@ -29,10 +30,14 @@ body {
 .container {
   /* height: 100vh; */
   background-color: #ffffff;
-  width: 80%;
+  max-width: 1080px;
   margin: 0 auto;
   border-radius: 20px;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   margin-top: 60px;
+}
+
+.content {
+  padding: 45px 60px;
 }
 

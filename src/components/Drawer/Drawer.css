@@ -1,0 +1,42 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	opacity: 0.65;
+	z-index: 10;
+}
+
+.drawer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 385px;
+	height: 100%;
+	padding: 30px;
+	background-color: #ffffff;
+	z-index: 15;
+}
+
+.drawer-cart__title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.drawer__close {
+	cursor: pointer;
+	opacity: 0.3;
+	transform: rotate(180deg);
+	transition: translate 0.2s ease;
+}
+
+.drawer__close:hover {
+	opacity: 1;
+	transform: rotate(180deg);
+	translate: calc(-0.25rem);
+}
+
+
