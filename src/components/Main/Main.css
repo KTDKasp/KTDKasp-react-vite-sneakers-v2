@@ -1,0 +1,15 @@
+.main {
+  
+}
+
+.main__header {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 39px;
+  margin-bottom: 40px;
+}
+
+.main__card-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}

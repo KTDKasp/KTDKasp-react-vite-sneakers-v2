@@ -1,10 +1,16 @@
 import React from 'react'
+import { Header } from './components/Header'
+
+import './app.css'
+import { Main } from './components/Main'
 
 function App() {
 
   return (
-    <div>
-      <h1>Hello world</h1>
+    <div className='container'>
+      <Header />
+
+      <Main />
     </div>
   )
 }
