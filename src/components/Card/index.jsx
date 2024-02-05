@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 
 import './Card.css';
 
-export const Card = ({ id, imageUrl, price, title, isFavorite, isAdded, onClickAdd }) => {
+export const Card = ({ imageUrl, price, title, isFavorite, isAdded }) => {
   return (
     <div className='card-item'>
       <div className='card__top'>
@@ -19,7 +19,7 @@ export const Card = ({ id, imageUrl, price, title, isFavorite, isAdded, onClickA
           <span>Цена:</span>
           <b>{price} руб.</b>
         </div>
-        <img onClick={onClickAdd} className='card__add' src={
+        <img onClick={() => console.log(123)} className='card__add' src={
           isAdded ? '/svg/checked.svg' : '/svg/plus.svg'
         } alt="Plus" />
       </div>

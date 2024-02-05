@@ -1,11 +1,10 @@
-import React from 'react';
+// import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { Home } from './pages/Home';
 import { MainLayout } from './layout/MainLayout';
 
 import './app.css';
-import { Drawer } from './components/Drawer';
 
 function App() {
 	return (
