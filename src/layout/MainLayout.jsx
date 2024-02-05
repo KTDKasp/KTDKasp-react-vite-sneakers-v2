@@ -5,7 +5,7 @@ import { Drawer } from "../components/Drawer";
 export const MainLayout = () => {
 	return (
 		<>
-			<Drawer />
+			{/* <Drawer /> */}
 			<Header />
 			<div className="content">
 				<Outlet />

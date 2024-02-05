@@ -17,8 +17,6 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "react/jsx-no-target-blank": {
-      enforceDynamicLinks: 0,
-    }
+    "react/jsx-no-target-blank": 0
   },
 }
