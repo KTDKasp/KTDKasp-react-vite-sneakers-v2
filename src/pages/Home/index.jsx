@@ -7,31 +7,81 @@ import './Home.css';
 
 export const Home = () => {
   const [items, setItems] = React.useState([]);
-  const [sortType, setSortType] = React.useState('');
+  const [sortType, setSortType] = React.useState('title');
   const [searchValue, setSearchValue] = React.useState('');
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://6d35450ae5876ee3.mokky.dev/items?sortBy=${sortType}&title=*${searchValue}*`
-        );
-        setItems(data);
-      } catch (error) {
-        console.log(`Hey, you have ${error}`);
-      }
+  const fetchData = React.useCallback(async () => {
+    const params = {
+      sortBy: sortType,
     };
 
-    fetchData();
-  }, [sortType, searchValue]);
+    if (searchValue) {
+      params.title = `*${searchValue}*`;
+    }
 
+    try {
+      const { data } = await axios.get(
+        `https://6d35450ae5876ee3.mokky.dev/items`,
+        {
+          params,
+        }
+      );
+      setItems(data.map((obj) => ({...obj, isFavorite: false, isAdded: false})));
+
+    } catch (error) {
+      console.log(`Hey, you have ${error}`);
+    }
+  }, [searchValue, sortType])
+
+  const fetchFavorites = React.useCallback(async () => {
+    try {
+      const { data: favorites } = await axios.get(`https://6d35450ae5876ee3.mokky.dev/favorites`)
+      setItems((prev) => prev.map((obj) => {
+        const favorite = favorites.find(favoriteData => favoriteData.parentId === obj.id);
+
+        if (!favorite) {
+          return obj;
+        }
+
+        return {
+          ...obj,
+          isAdded: false,
+          isFavorite: true,
+          favoriteId: favorite.id
+        }
+      }));
+    } catch (error) {
+      console.log(`Hey, you have ${error}`);
+    }
+  }, []) 
+
+  
+  React.useEffect(() => {
+    async function onMount() {
+      await fetchData();
+      await fetchFavorites()
+    }
+    
+    onMount();
+  }, [fetchData, fetchFavorites]);
+  
   const onChangeSelect = (event) => {
     setSortType(event.target.value);
   };
-
-  const onChangeSearch = (event) => {
+  
+  const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
   };
+  
+  // TODO: Нужно исправить добавление в закладки
+  const addToFavorite = (item) => {
+    if (!item.isFavorite) {
+      item.isFavorite = true;
+    }
+    else {
+      item.isFavorite = false;
+    }
+  }
 
   return (
     <div className="main">
@@ -40,7 +90,7 @@ export const Home = () => {
         <h2 className="content__h2">Все кроссовки</h2>
         <div className="search-and-sort">
           <select onChange={onChangeSelect} className="sort__type">
-            <option value="name">По названию</option>
+            <option value="title">По названию</option>
             <option value="price">По цене (дешевые)</option>
             <option value="-price">По цене (дорогие)</option>
           </select>
@@ -51,12 +101,12 @@ export const Home = () => {
               type="text"
               placeholder="Поиск..."
               value={searchValue}
-              onChange={onChangeSearch}
+              onChange={onChangeSearchInput}
             />
           </div>
         </div>
       </div>
-      <CardList items={items} />
+      <CardList items={items} addToFavorite={addToFavorite}/>
     </div>
   );
 };
