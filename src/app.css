@@ -47,3 +47,30 @@ body {
   padding: 45px 60px;
 }
 
+.button_green {
+	background-color: rgb(157, 213, 88);
+	border-radius: 20px;
+	padding: 18px;
+	width: 100%;
+	text-align: center;
+	border: none;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.button_green:hover {
+	background-color: rgb(136, 192, 67);
+}
+
+.button_green:active {
+	background-color: rgb(114, 171, 45);
+}
+
+.button_green:disabled {
+	background-color: rgb(189, 189, 189);
+}
+

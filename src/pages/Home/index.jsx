@@ -75,13 +75,15 @@ export const Home = () => {
   
   // TODO: Нужно исправить добавление в закладки
   const addToFavorite = (item) => {
-    if (!item.isFavorite) {
-      item.isFavorite = true;
-    }
-    else {
-      item.isFavorite = false;
-    }
-  }
+    setItems(prevItems => (
+      prevItems.map(prevItem => {
+        if (prevItem.id === item.id) {
+          return { ...prevItem, isFavorite: !prevItem.isFavorite};
+        }
+        return prevItem;
+      })
+    ));
+  };
 
   return (
     <div className="main">

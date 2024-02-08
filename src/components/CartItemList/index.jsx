@@ -5,8 +5,6 @@ export const CartItemList = () => {
 		<>
 			<CartItem />
 			<CartItem />
-			<CartItem />
-			<CartItem />
 		</>
 	)
 }

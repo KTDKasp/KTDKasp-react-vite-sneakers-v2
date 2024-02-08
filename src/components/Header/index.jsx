@@ -16,10 +16,12 @@ export const Header = () => {
       </Link>
 
       <ul className="header__right">
-        <li className="header__list-elem">
-          <img src="/svg/cart.svg" alt="Cart" />
-          <b>1205 руб.</b>
-        </li>
+        <Link to="cart">
+          <li className="header__list-elem">
+            <img src="/svg/cart.svg" alt="Cart" />
+            <b>1205 руб.</b>
+          </li>
+        </Link>
         <Link to="favorites">
           <li className="header__list-elem">
             <img src="/svg/heart.svg" alt="Saved" />
