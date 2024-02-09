@@ -26,63 +26,103 @@ export const Home = () => {
           params,
         }
       );
-      setItems(data.map((obj) => ({...obj, isFavorite: false, isAdded: false})));
-
+      setItems(
+        data.map((obj) => ({
+          ...obj,
+          isFavorite: false,
+          isAdded: false,
+          favoriteId: null,
+        }))
+      );
     } catch (error) {
       console.log(`Hey, you have ${error}`);
     }
-  }, [searchValue, sortType])
+  }, [searchValue, sortType]);
 
   const fetchFavorites = React.useCallback(async () => {
     try {
-      const { data: favorites } = await axios.get(`https://6d35450ae5876ee3.mokky.dev/favorites`)
-      setItems((prev) => prev.map((obj) => {
-        const favorite = favorites.find(favoriteData => favoriteData.parentId === obj.id);
+      const { data: favorites } = await axios.get(
+        `https://6d35450ae5876ee3.mokky.dev/favorites`
+      );
+      setItems((prev) =>
+        prev.map((obj) => {
+          const favorite = favorites.find(
+            (favoriteData) => favoriteData.parentId === obj.id
+          );
 
-        if (!favorite) {
-          return obj;
-        }
+          if (!favorite) {
+            return obj;
+          }
 
-        return {
-          ...obj,
-          isAdded: false,
-          isFavorite: true,
-          favoriteId: favorite.id
-        }
-      }));
+          return {
+            ...obj,
+            isFavorite: true,
+            favoriteId: favorite.id,
+          };
+        })
+      );
     } catch (error) {
       console.log(`Hey, you have ${error}`);
     }
-  }, []) 
+  }, []);
 
-  
   React.useEffect(() => {
     async function onMount() {
       await fetchData();
-      await fetchFavorites()
+      await fetchFavorites();
     }
-    
+
     onMount();
   }, [fetchData, fetchFavorites]);
-  
+
   const onChangeSelect = (event) => {
     setSortType(event.target.value);
   };
-  
+
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
   };
-  
+
   // TODO: Нужно исправить добавление в закладки
-  const addToFavorite = (item) => {
-    setItems(prevItems => (
-      prevItems.map(prevItem => {
-        if (prevItem.id === item.id) {
-          return { ...prevItem, isFavorite: !prevItem.isFavorite};
-        }
-        return prevItem;
-      })
-    ));
+  const addToFavorite = async (item) => {
+    try {
+      if (!item.isFavorite) {
+        const { data } = await axios.post(
+          `https://6d35450ae5876ee3.mokky.dev/favorites`,
+          { parentId: item.id }
+        );
+        setItems((prev) =>
+          prev.map((obj) => {
+            if (obj.id === item.id) {
+              return {
+                ...obj,
+                isFavorite: true,
+                favoriteId: data.id,
+              };
+            }
+            return obj;
+          })
+        );
+      } else {
+        await axios.delete(
+          `https://6d35450ae5876ee3.mokky.dev/favorites/${item.favoriteId}`
+        );
+        setItems((prev) =>
+          prev.map((obj) => {
+            if (obj.id === item.id) {
+              return {
+                ...obj,
+                isFavorite: false,
+                favoriteId: null,
+              };
+            }
+            return obj;
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -108,7 +148,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <CardList items={items} addToFavorite={addToFavorite}/>
+      <CardList items={items} addToFavorite={addToFavorite} />
     </div>
   );
 };
