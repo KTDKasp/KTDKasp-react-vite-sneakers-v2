@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 
-export const Header = () => {
+export const Header = (props) => {
   return (
     <header className="header">
       <Link to="/">
@@ -16,12 +16,10 @@ export const Header = () => {
       </Link>
 
       <ul className="header__right">
-        <Link to="cart">
-          <li className="header__list-elem">
+          <li onClick={props.onClickOpenDrawer} className="header__list-elem">
             <img src="/svg/cart.svg" alt="Cart" />
             <b>1205 руб.</b>
           </li>
-        </Link>
         <Link to="favorites">
           <li className="header__list-elem">
             <img src="/svg/heart.svg" alt="Saved" />

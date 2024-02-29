@@ -2,7 +2,7 @@ import { Card } from '../Card';
 
 import './CardList.css';
 
-export const CardList = ({ items, addToFavorite }) => {
+export const CardList = ({ items }) => {
 
   const onClickAdd = () => {
     console.log(items);
@@ -20,7 +20,7 @@ export const CardList = ({ items, addToFavorite }) => {
           imageUrl={item.imageUrl}
           isFavorite={item.isFavorite}
           onClickAdd={onClickAdd}
-          onClickFavorite={() => addToFavorite(item)}
+          onClickFavorite={() => console.log(item)}
         />
       ))}
     </div>

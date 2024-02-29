@@ -9,6 +9,8 @@ export const Home = () => {
   const [items, setItems] = React.useState([]);
   const [sortType, setSortType] = React.useState('title');
   const [searchValue, setSearchValue] = React.useState('');
+  // const [isFavorite, setIsFavorite] = React.useState(false);
+  // const [isAdded, setIsAdded] = React.useState(false);
 
   const fetchData = React.useCallback(async () => {
     const params = {
@@ -26,54 +28,20 @@ export const Home = () => {
           params,
         }
       );
-      setItems(
-        data.map((obj) => ({
-          ...obj,
-          isFavorite: false,
-          isAdded: false,
-          favoriteId: null,
-        }))
-      );
+      setItems(data);
     } catch (error) {
       console.log(`Hey, you have ${error}`);
     }
   }, [searchValue, sortType]);
 
-  const fetchFavorites = React.useCallback(async () => {
-    try {
-      const { data: favorites } = await axios.get(
-        `https://6d35450ae5876ee3.mokky.dev/favorites`
-      );
-      setItems((prev) =>
-        prev.map((obj) => {
-          const favorite = favorites.find(
-            (favoriteData) => favoriteData.parentId === obj.id
-          );
-
-          if (!favorite) {
-            return obj;
-          }
-
-          return {
-            ...obj,
-            isFavorite: true,
-            favoriteId: favorite.id,
-          };
-        })
-      );
-    } catch (error) {
-      console.log(`Hey, you have ${error}`);
-    }
-  }, []);
-
+  
   React.useEffect(() => {
     async function onMount() {
       await fetchData();
-      await fetchFavorites();
     }
 
     onMount();
-  }, [fetchData, fetchFavorites]);
+  }, [fetchData]);
 
   const onChangeSelect = (event) => {
     setSortType(event.target.value);
@@ -84,46 +52,6 @@ export const Home = () => {
   };
 
   // TODO: Нужно исправить добавление в закладки
-  const addToFavorite = async (item) => {
-    try {
-      if (!item.isFavorite) {
-        const { data } = await axios.post(
-          `https://6d35450ae5876ee3.mokky.dev/favorites`,
-          { parentId: item.id }
-        );
-        setItems((prev) =>
-          prev.map((obj) => {
-            if (obj.id === item.id) {
-              return {
-                ...obj,
-                isFavorite: true,
-                favoriteId: data.id,
-              };
-            }
-            return obj;
-          })
-        );
-      } else {
-        await axios.delete(
-          `https://6d35450ae5876ee3.mokky.dev/favorites/${item.favoriteId}`
-        );
-        setItems((prev) =>
-          prev.map((obj) => {
-            if (obj.id === item.id) {
-              return {
-                ...obj,
-                isFavorite: false,
-                favoriteId: null,
-              };
-            }
-            return obj;
-          })
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className="main">
@@ -148,7 +76,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <CardList items={items} addToFavorite={addToFavorite} />
+      <CardList items={items} />
     </div>
   );
 };
