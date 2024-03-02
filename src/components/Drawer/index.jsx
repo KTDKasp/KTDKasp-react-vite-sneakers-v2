@@ -1,11 +1,14 @@
-// import React from 'react';
+import React from 'react';
 
+import { CartItemsContext } from '../../App';
 import { CartItemList } from '../CartItemList';
 import arrowClose from '/svg/arrow-next-drawer.svg';
 
 import './Drawer.css';
 
 export const Drawer = (props) => {
+	const { cartItems } = React.useContext(CartItemsContext);
+
 	return (
 		<>
 			<div className="overlay"></div>
@@ -16,7 +19,7 @@ export const Drawer = (props) => {
 				</div>
 
 				<div className="drawer-cart__list">
-					<CartItemList />
+					{<CartItemList items={cartItems}/>}
 				</div>
 
 				<div className="drawer-cart__total">

@@ -5,7 +5,6 @@ import { Drawer } from "../components/Drawer";
 
 export const MainLayout = () => {
 	const [drawerOpen, setDrawerOpen] = React.useState(false);
-
 	return (
 		<>
 			{drawerOpen && <Drawer onClickClose={() => setDrawerOpen(false)} />}

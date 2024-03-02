@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { MainLayout } from './layout/MainLayout';
@@ -8,9 +8,14 @@ import { CartPage } from './pages/CartPage';
 
 import './app.css';
 
+export const CartItemsContext = React.createContext();
+
 function App() {
+	const [cartItems, setCartItems] = React.useState([]);
+
 	return (
 		<div className="container">
+			<CartItemsContext.Provider value={{cartItems, setCartItems}}>
 			<Routes>
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<Home />} />
@@ -18,6 +23,7 @@ function App() {
 					<Route path="cart" element={<CartPage />} />
 				</Route>
 			</Routes>
+			</CartItemsContext.Provider>
 		</div>
 	);
 }
