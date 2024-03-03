@@ -43,6 +43,7 @@
 }
 
 .drawer-cart__list {
+	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
