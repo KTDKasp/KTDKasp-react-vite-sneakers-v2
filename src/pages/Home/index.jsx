@@ -4,11 +4,13 @@ import axios from 'axios';
 import { CardList } from '../../components/CardList';
 
 import './Home.css';
+import { CartItemsContext } from '../../App';
 
 export const Home = () => {
   const [items, setItems] = React.useState([]);
   const [sortType, setSortType] = React.useState('title');
   const [searchValue, setSearchValue] = React.useState('');
+  const { setCartItems } = React.useContext(CartItemsContext);
   // const [isFavorite, setIsFavorite] = React.useState(false);
   // const [isAdded, setIsAdded] = React.useState(false);
 
@@ -34,14 +36,26 @@ export const Home = () => {
     }
   }, [searchValue, sortType]);
 
+  const fetchCartItems = React.useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        `https://6d35450ae5876ee3.mokky.dev/cart`
+      );
+      setCartItems(data)
+    } catch (error) {
+      console.log(`Hey, you have ${error}`);
+    }
+  }, []);
+
   
   React.useEffect(() => {
     async function onMount() {
       await fetchData();
+      await fetchCartItems();
     }
 
     onMount();
-  }, [fetchData]);
+  }, [fetchData, fetchCartItems]);
 
   const onChangeSelect = (event) => {
     setSortType(event.target.value);
