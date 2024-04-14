@@ -2,11 +2,11 @@ import { Card } from '../Card';
 
 import './CardList.css';
 
-export const CardList = ({ items }) => {
+export const CardList = ({ items, onAddToCart }) => {
 
-  const onClickAdd = () => {
-    console.log(items);
-  }
+  // const onClickAdd = () => {
+  //   console.log(items);
+  // }
 
   return (
     <div className="card-list">
@@ -19,7 +19,7 @@ export const CardList = ({ items }) => {
           title={item.title}
           imageUrl={item.imageUrl}
           isFavorite={item.isFavorite}
-          onClickAdd={onClickAdd}
+          onClickAdd={() => onAddToCart(item)}
           onClickFavorite={() => console.log(item)}
         />
       ))}

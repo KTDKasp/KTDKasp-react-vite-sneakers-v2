@@ -45,6 +45,7 @@
 .drawer-cart__list {
 	display: flex;
 	flex-direction: column;
+	overflow: overlay;
 	gap: 20px;
 	margin-bottom: 30px;
 	flex: 1;

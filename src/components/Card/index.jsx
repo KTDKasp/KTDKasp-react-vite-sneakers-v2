@@ -1,8 +1,14 @@
-// import React from 'react';
-
+import React from 'react';
 import './Card.css';
 
 export const Card = ({ imageUrl, price, title, isFavorite, isAdded, onClickAdd, onClickFavorite }) => {
+  const [isAddedCard, setIsAddedCard] = React.useState(false);
+
+  const onClickAddBtn = () => {
+    setIsAddedCard(!isAddedCard);
+    onClickAdd({ imageUrl, price, title, isFavorite, isAdded });
+  };
+
 
   return (
     <div className='card-item'>
@@ -20,8 +26,8 @@ export const Card = ({ imageUrl, price, title, isFavorite, isAdded, onClickAdd, 
           <span>Цена:</span>
           <b>{price} руб.</b>
         </div>
-        <img onClick={onClickAdd} className='card__add' src={
-          isAdded ? '/svg/checked.svg' : '/svg/plus.svg'
+        <img onClick={() => onClickAddBtn()} className='card__add' src={
+          isAddedCard ? '/svg/checked.svg' : '/svg/plus.svg'
         } alt="Plus" />
       </div>
     </div>
