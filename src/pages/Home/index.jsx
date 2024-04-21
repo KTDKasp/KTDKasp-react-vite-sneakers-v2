@@ -32,6 +32,10 @@ export const Home = () => {
 				}
 			);
 			setItems(data);
+
+			axios.get('https://6d35450ae5876ee3.mokky.dev/cart').then((res) => {
+				setCartItems(res.data);
+			})
 		} catch (error) {
 			console.log(`Hey, you have ${error}`);
 		}
@@ -54,7 +58,17 @@ export const Home = () => {
 	};
 
   const onAddToCart = (obj) => {
-    setCartItems((prev) => [...prev, obj]);
+		console.log(obj);
+    setCartItems((prev) => {
+			const isItemAdded = prev.find((item) => Number(item.id) === Number(obj.id));
+			if (isItemAdded) {
+				// axios.delete(`https://6d35450ae5876ee3.mokky.dev/cart/${obj.id}`);
+				return prev.filter((item) => Number(item.id) !== Number(obj.id));
+			} else {
+				axios.post('https://6d35450ae5876ee3.mokky.dev/cart', obj);
+				return [...prev, obj];
+			}
+		});
   };
 
 	// TODO: Нужно исправить добавление в закладки

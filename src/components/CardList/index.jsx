@@ -19,7 +19,7 @@ export const CardList = ({ items, onAddToCart }) => {
           title={item.title}
           imageUrl={item.imageUrl}
           isFavorite={item.isFavorite}
-          onClickAdd={() => onAddToCart(item)}
+          onClickAdd={(obj) => onAddToCart(obj)}
           onClickFavorite={() => console.log(item)}
         />
       ))}

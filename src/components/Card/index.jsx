@@ -1,12 +1,12 @@
 import React from 'react';
 import './Card.css';
 
-export const Card = ({ imageUrl, price, title, isFavorite, isAdded, onClickAdd, onClickFavorite }) => {
+export const Card = ({ id, imageUrl, price, title, isFavorite, isAdded, onClickAdd, onClickFavorite }) => {
   const [isAddedCard, setIsAddedCard] = React.useState(false);
 
   const onClickAddBtn = () => {
     setIsAddedCard(!isAddedCard);
-    onClickAdd({ imageUrl, price, title, isFavorite, isAdded });
+    onClickAdd({ id, imageUrl, price, title, isFavorite, isAdded });
   };
 
 
