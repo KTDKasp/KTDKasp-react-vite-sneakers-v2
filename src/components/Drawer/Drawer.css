@@ -70,11 +70,31 @@
 	border: 1px dashed rgb(223, 223, 223);
 }
 
-/* #TODO - CSS: Завершить верстку пустой корзины */
 .drawer__empty {
+	margin: auto 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	gap: 20px;
+}
+
+.drawer__empty > p {
+	text-align: center;
+}
+
+.drawer__button_green {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.drawer__button_green > img {
+	transform: rotate(180deg);
+	transition: translate 0.2s ease;
+}
+
+.drawer__button_green:hover > img {
+	translate: calc(-0.25rem);
 }

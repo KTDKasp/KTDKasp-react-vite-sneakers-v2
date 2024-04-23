@@ -65,7 +65,7 @@ export const Home = () => {
 				// axios.delete(`https://6d35450ae5876ee3.mokky.dev/cart/${obj.id}`);
 				return prev.filter((item) => Number(item.id) !== Number(obj.id));
 			} else {
-				axios.post('https://6d35450ae5876ee3.mokky.dev/cart', obj);
+				// axios.post('https://6d35450ae5876ee3.mokky.dev/cart', obj);
 				return [...prev, obj];
 			}
 		});

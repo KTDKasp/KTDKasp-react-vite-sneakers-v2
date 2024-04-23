@@ -66,7 +66,7 @@ export const Drawer = (props) => {
 						<img width="120px" height="120px" src="/png/package-icon.png" alt="Empty Cart" />
 						<h2>Корзина пустая</h2>
 						<p>Добавьте хотя бы одну пару кроссовок, чтобы оформить заказ.</p>
-						<button className="button_green">
+						<button onClick={props.onClickClose} className="button_green drawer__button_green">
 							<img src="/svg/arrow-next.svg" alt="Arrow" />
 							Вернуться назад
 						</button>
