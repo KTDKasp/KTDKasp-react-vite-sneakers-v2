@@ -18,7 +18,7 @@ export const Header = (props) => {
       <ul className="header__right">
           <li onClick={props.onClickOpenDrawer} className="header__list-elem">
             <img src="/svg/cart.svg" alt="Cart" />
-            <b>1205 руб.</b>
+            <b>{props.cartTotalPrice} руб.</b>
           </li>
         <Link to="favorites">
           <li className="header__list-elem">

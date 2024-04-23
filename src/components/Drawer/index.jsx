@@ -9,9 +9,9 @@ import AppContext from '../../context';
 export const Drawer = (props) => {
 	const { cartItems, setCartItems } = React.useContext(AppContext);
 
-	const onRemoveItem = (id) => {
+	const onRemoveItem = (obj) => {
 		// axios.delete(`https://6d35450ae5876ee3.mokky.dev/cart/${id}`);
-		setCartItems((prev) => prev.filter((item) => item.id !== id));
+		setCartItems((prev) => prev.filter((item) => item.id !== obj.id));
 	};
 
 	return (
@@ -38,7 +38,7 @@ export const Drawer = (props) => {
 									title={obj.title}
 									price={obj.price}
 									imageUrl={obj.imageUrl}
-									onRemove={() => onRemoveItem(obj.id)}
+									onRemove={() => onRemoveItem(obj)}
 								/>
 							))}
 						</div>
@@ -46,13 +46,13 @@ export const Drawer = (props) => {
 							<div className="drawer-cart__summary">
 								<span>Итого:</span>
 								<div></div>
-								<b>12 990 руб.</b>
+								<b>{props.cartTotalPrice} руб.</b>
 							</div>
 
 							<div className="drawer-cart__summary">
 								<span>Налог 5%:</span>
 								<div></div>
-								<b>1074 руб.</b>
+								<b>{props.cartSalePrice} руб.</b>
 							</div>
 						</div>
 
