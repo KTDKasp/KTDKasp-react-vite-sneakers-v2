@@ -33,9 +33,9 @@ export const Home = () => {
 			);
 			setItems(data);
 
-			axios.get('https://6d35450ae5876ee3.mokky.dev/cart').then((res) => {
-				setCartItems(res.data);
-			})
+			// axios.get('https://6d35450ae5876ee3.mokky.dev/cart').then((res) => {
+			// 	setCartItems(res.data);
+			// })
 		} catch (error) {
 			console.log(`Hey, you have ${error}`);
 		}

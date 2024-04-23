@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import arrowClose from '/svg/arrow-next-drawer.svg';
 
@@ -13,6 +14,19 @@ export const Drawer = (props) => {
 		// axios.delete(`https://6d35450ae5876ee3.mokky.dev/cart/${id}`);
 		setCartItems((prev) => prev.filter((item) => item.id !== obj.id));
 	};
+
+	const createOrder = React.useCallback(async () => {
+		try { 
+			const { data } = await axios.post('https://6d35450ae5876ee3.mokky.dev/orders', {
+				items: cartItems,
+				total: props.cartTotalPrice
+			});
+			setCartItems([]);
+			return data;
+		} catch (e) {
+			console.log(e);
+		}
+	}, []);
 
 	return (
 		<>
@@ -56,7 +70,7 @@ export const Drawer = (props) => {
 							</div>
 						</div>
 
-						<button className="button_green" disabled>
+						<button onClick={() => createOrder()} className="button_green" disabled={!cartItems.length ? true : false}>
 							Оформить заказ
 						</button>
 					</>
