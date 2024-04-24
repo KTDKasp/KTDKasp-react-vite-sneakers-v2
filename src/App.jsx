@@ -10,7 +10,9 @@ import AppContext from './context';
 import './app.css';
 
 function App() {
-	const [cartItems, setCartItems] = React.useState([]);
+	const [cartItems, setCartItems] = React.useState(() => {
+		return JSON.parse(localStorage.getItem('cart')) || [];
+	});
 	const [items, setItems] = React.useState([]);
 
 

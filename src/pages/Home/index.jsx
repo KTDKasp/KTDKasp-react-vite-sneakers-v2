@@ -58,7 +58,6 @@ export const Home = () => {
 	};
 
   const onAddToCart = (obj) => {
-		console.log(obj);
     setCartItems((prev) => {
 			const isItemAdded = prev.find((item) => Number(item.id) === Number(obj.id));
 			if (isItemAdded) {

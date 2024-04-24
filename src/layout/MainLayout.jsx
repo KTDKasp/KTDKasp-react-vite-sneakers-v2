@@ -18,6 +18,7 @@ export const MainLayout = () => {
     setSalePrice(() =>
       cartItems.reduce((acc, item) => Math.round(acc + Number(item.price) * 0.05), 0)
     );
+    localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   return (
