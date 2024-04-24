@@ -8,10 +8,9 @@ import { CartItem } from '../CartItem';
 import AppContext from '../../context';
 
 export const Drawer = (props) => {
-	const { cartItems, setCartItems } = React.useContext(AppContext);
+	const { animationParent, cartItems, setCartItems } = React.useContext(AppContext);
 
 	const onRemoveItem = (obj) => {
-		// axios.delete(`https://6d35450ae5876ee3.mokky.dev/cart/${id}`);
 		setCartItems((prev) => prev.filter((item) => item.id !== obj.id));
 	};
 
@@ -44,7 +43,7 @@ export const Drawer = (props) => {
 
 				{cartItems.length > 0 ? (
 					<>
-						<div className="drawer-cart__list">
+						<div ref={animationParent} className="drawer-cart__list">
 							{cartItems.map((obj) => (
 								<CartItem
 									key={obj.id}
@@ -75,7 +74,6 @@ export const Drawer = (props) => {
 						</button>
 					</>
 				) : (
-					// #TODO: Завершить верстку пустой корзины
 					<div className='drawer__empty'>
 						<img width="120px" height="120px" src="/png/package-icon.png" alt="Empty Cart" />
 						<h2>Корзина пустая</h2>

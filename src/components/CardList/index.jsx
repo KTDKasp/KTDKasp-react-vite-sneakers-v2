@@ -1,15 +1,14 @@
+import React from 'react';
+import AppContext from '../../context';
 import { Card } from '../Card';
 
 import './CardList.css';
 
 export const CardList = ({ items, onAddToCart }) => {
-
-  // const onClickAdd = () => {
-  //   console.log(items);
-  // }
+  const { animationParent } = React.useContext(AppContext);
 
   return (
-    <div className="card-list">
+    <div ref={animationParent} className="card-list">
       {items.map((item, index) => (
         <Card
           key={index}

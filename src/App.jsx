@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 import { MainLayout } from './layout/MainLayout';
 import { Home } from './pages/Home';
@@ -14,11 +15,12 @@ function App() {
 		return JSON.parse(localStorage.getItem('cart')) || [];
 	});
 	const [items, setItems] = React.useState([]);
+	const [animationParent] = useAutoAnimate();
 
 
 	return (
 		<div className="container">
-			<AppContext.Provider value={{ cartItems, setCartItems, setItems, items }}>
+			<AppContext.Provider value={{ animationParent, cartItems, setCartItems, setItems, items }}>
 				<Routes>
 					<Route path="/" element={<MainLayout />}>
 						<Route index element={<Home />} />
