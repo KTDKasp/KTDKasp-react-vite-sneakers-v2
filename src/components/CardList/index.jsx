@@ -4,7 +4,7 @@ import { Card } from '../Card';
 
 import './CardList.css';
 
-export const CardList = ({ items, onAddToCart }) => {
+export const CardList = ({ items, onAddToCart, onAddToFavotites }) => {
   const { animationParent } = React.useContext(AppContext);
 
   return (
@@ -19,7 +19,7 @@ export const CardList = ({ items, onAddToCart }) => {
           imageUrl={item.imageUrl}
           isFavorite={item.isFavorite}
           onClickAdd={(obj) => onAddToCart(obj)}
-          onClickFavorite={() => console.log(item)}
+          onClickFavorite={(obj) => onAddToFavotites(obj)}
         />
       ))}
     </div>

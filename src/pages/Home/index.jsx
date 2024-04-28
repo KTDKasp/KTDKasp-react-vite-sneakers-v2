@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import debounce from 'lodash.debounce';
 
 import { CardList } from '../../components/CardList';
 import AppContext from '../../context';
@@ -9,8 +10,9 @@ import './Home.css';
 export const Home = () => {
 	const [sortType, setSortType] = React.useState('title');
 	const [searchValue, setSearchValue] = React.useState('');
+	// const [inputValue, setInputValue] = React.useState('');
 
-  const { setCartItems, items, setItems } = React.useContext(AppContext);
+  const { items, setItems, onAddToFavotites, onAddToCart } = React.useContext(AppContext);
 
 	const fetchData = React.useCallback(async () => {
 		const params = {
@@ -43,26 +45,13 @@ export const Home = () => {
 		onMount();
 	}, [fetchData]);
 
-	const onChangeSelect = (event) => {
+	const onChangeSelect = debounce((event) => {
 		setSortType(event.target.value);
-	};
+	}, 250);
 
 	const onChangeSearchInput = (event) => {
 		setSearchValue(event.target.value);
 	};
-
-  const onAddToCart = (obj) => {
-    setCartItems((prev) => {
-			const isItemAdded = prev.find((item) => Number(item.id) === Number(obj.id));
-			if (isItemAdded) {
-				return prev.filter((item) => Number(item.id) !== Number(obj.id));
-			} else {
-				return [...prev, obj];
-			}
-		});
-  };
-
-	// TODO: Нужно исправить добавление в закладки
 
 	return (
 		<div className="main">
@@ -82,20 +71,22 @@ export const Home = () => {
 							type="text"
 							placeholder="Поиск..."
 							value={searchValue}
-							onChange={onChangeSearchInput}
+							onChange={(event) => onChangeSearchInput(event)}
 						/>
-						{searchValue && (
-							<img
-								onClick={() => setSearchValue('')}
-								className="search__clear"
-								src="/svg/close.svg"
-								alt="Clear"
-							/>
-						)}
+						{
+							searchValue && (
+								<img
+									onClick={() => setSearchValue('')}
+									className="search__clear"
+									src="/svg/close.svg"
+									alt="Clear"
+								/>
+							)
+						}
 					</div>
 				</div>
 			</div>
-			<CardList items={items} onAddToCart={onAddToCart}/>
+			<CardList items={items} onAddToCart={onAddToCart} onAddToFavotites={onAddToFavotites}/>
 		</div>
 	);
 };
