@@ -26,10 +26,12 @@ export const Header = (props) => {
             <span>Закладки</span>
           </li>
         </Link>
-        <li className="header__list-elem">
-          <img src="/svg/profile.svg" alt="Profile" />
-          <span>Профиль</span>
-        </li>
+        <Link to='cart'>
+          <li className="header__list-elem">
+            <img src="/svg/profile.svg" alt="Profile" />
+            <span>Профиль</span>
+          </li>
+        </Link>
       </ul>
     </header>
   );

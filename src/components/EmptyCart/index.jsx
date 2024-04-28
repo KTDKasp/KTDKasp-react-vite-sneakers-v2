@@ -12,8 +12,11 @@ export const EmptyCart = () => {
         <br />
         Оформите хотя бы один заказ.
       </p>
-      <Link to="/">
-        <button className='button_green'>Вернуться назад</button>
+      <Link to="/" className='return-homepage'>
+        <button className='button_green drawer__button_green'>
+          <img src="/svg/arrow-next.svg" alt="Arrow" />
+          Вернуться назад
+        </button>
       </Link>
     </div>
   );

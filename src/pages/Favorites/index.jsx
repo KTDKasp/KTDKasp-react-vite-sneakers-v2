@@ -64,7 +64,7 @@ export const Favorites = () => {
             <h2>{'Закладок нет :('}</h2>
             <p>Вы ничего не добавляли в закладки</p>
           </div>
-          <Link className="favorites__back" to="/">
+          <Link className="return-homepage" to="/">
             <button className="button_green drawer__button_green">
               <img src="/svg/arrow-next.svg" alt="Arrow" />
               Вернуться назад
