@@ -29,6 +29,18 @@ function App() {
 			}
 		});
   };
+	
+  React.useEffect(() => {
+		try {
+			const fetchData = async () => {
+				const favoritesData = await axios.get('https://6d35450ae5876ee3.mokky.dev/favorites')
+				setFavoriteItems(favoritesData.data);
+			}
+			fetchData()
+		} catch (error) {
+			console.log(error);
+		}
+  }, []);
 
 	const onAddToFavotites = async (obj) => {
 		try {

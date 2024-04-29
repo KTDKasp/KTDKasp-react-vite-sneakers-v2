@@ -11,7 +11,7 @@ export const Card = ({
   onClickAdd,
   onClickFavorite,
 }) => {
-  const [isAddedCard, setIsAddedCard] = React.useState(false);
+  const [isAddedCard, setIsAddedCard] = React.useState(isAdded);
   const [isFavoriteCard, setIsFavoriteCard] = React.useState(isFavorite);
 
   const onClickAddBtn = () => {

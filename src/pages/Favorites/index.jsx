@@ -3,29 +3,15 @@ import { Link } from 'react-router-dom';
 import { Card } from '../../components/Card';
 
 import './Favorites.css';
-import axios from 'axios';
 import AppContext from '../../context';
 
 export const Favorites = () => {
   const {
     favoriteItems,
-    setFavoriteItems,
     animationParent,
     onAddToFavotites,
     onAddToCart,
   } = React.useContext(AppContext);
-
-  React.useEffect(() => {
-    axios
-      .get('https://6d35450ae5876ee3.mokky.dev/favorites')
-      .then((res) => {
-        console.log(res.data);
-        setFavoriteItems(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <div className="favorites">
