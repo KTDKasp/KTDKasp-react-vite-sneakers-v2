@@ -5,14 +5,13 @@ import { Card } from '../Card';
 import './CardList.css';
 
 export const CardList = ({ items, onAddToCart, onAddToFavotites }) => {
-  const { animationParent, cartItems, favoriteItems } = React.useContext(AppContext);
+  const { animationParent, favoriteItems } = React.useContext(AppContext);
 
   return (
     <div ref={animationParent} className="card-list">
       {items.map((item, index) => (
         <Card
           key={index}
-          isAdded={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
           id={item.id}
           price={item.price}
           title={item.title}

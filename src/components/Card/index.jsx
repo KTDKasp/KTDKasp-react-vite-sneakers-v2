@@ -1,4 +1,6 @@
 import React from 'react';
+
+import AppContext from '../../context';
 import './Card.css';
 
 export const Card = ({
@@ -7,21 +9,20 @@ export const Card = ({
   price,
   title,
   isFavorite = false,
-  isAdded = false,
   onClickAdd,
   onClickFavorite,
 }) => {
-  const [isAddedCard, setIsAddedCard] = React.useState(isAdded);
   const [isFavoriteCard, setIsFavoriteCard] = React.useState(isFavorite);
 
+  const { isItemAdded } = React.useContext(AppContext);
+
   const onClickAddBtn = () => {
-    setIsAddedCard(!isAddedCard);
-    onClickAdd({ id, imageUrl, price, title, isFavorite, isAdded });
+    onClickAdd({ id, imageUrl, price, title, isFavorite });
   };
 
   const onClickFavoriteBtn = () => {
     setIsFavoriteCard(!isFavoriteCard);
-    onClickFavorite({ id, imageUrl, price, title, isFavorite, isAdded });
+    onClickFavorite({ id, imageUrl, price, title, isFavorite });
   };
 
   return (
@@ -44,7 +45,7 @@ export const Card = ({
         <img
           onClick={() => onClickAddBtn()}
           className="card__add"
-          src={isAddedCard ? '/svg/checked.svg' : '/svg/plus.svg'}
+          src={isItemAdded(id) ? '/svg/checked.svg' : '/svg/plus.svg'}
           alt="Plus"
         />
       </div>
