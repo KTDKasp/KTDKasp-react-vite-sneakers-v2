@@ -17,6 +17,7 @@ function App() {
   });
   const [favoriteItems, setFavoriteItems] = React.useState([]);
   const [items, setItems] = React.useState([]);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [animationParent] = useAutoAnimate();
 
 	const onAddToCart = (obj) => {
@@ -82,7 +83,9 @@ function App() {
 						setFavoriteItems,
 						onAddToFavotites,
 						onAddToCart,
-						isItemAdded
+						isItemAdded,
+						setDrawerOpen,
+						drawerOpen
 					}
 				}
       >

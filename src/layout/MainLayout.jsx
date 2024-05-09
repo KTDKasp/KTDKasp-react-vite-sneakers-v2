@@ -5,8 +5,7 @@ import { Drawer } from '../components/Drawer';
 import AppContext from '../context';
 
 export const MainLayout = () => {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const { cartItems } = React.useContext(AppContext);
+  const { cartItems, drawerOpen, setDrawerOpen } = React.useContext(AppContext);
 
   const [totalPrice, setTotalPrice] = React.useState(0);
   const [salePrice, setSalePrice] = React.useState(0);

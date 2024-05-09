@@ -81,6 +81,7 @@
 
 .drawer__empty > p {
 	text-align: center;
+	opacity: 0.4;
 }
 
 .drawer__button_green {
