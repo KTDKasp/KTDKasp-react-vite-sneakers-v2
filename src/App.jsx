@@ -17,6 +17,7 @@ function App() {
   });
   const [favoriteItems, setFavoriteItems] = React.useState([]);
   const [items, setItems] = React.useState([]);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [animationParent] = useAutoAnimate();
 
 	const onAddToCart = (obj) => {
@@ -47,7 +48,6 @@ function App() {
 			const isItemFavorite = favoriteItems.find((item) => Number(item.itemId) === Number(obj.id));
 				if (isItemFavorite) {
 					axios.delete(`https://6d35450ae5876ee3.mokky.dev/favorites/${isItemFavorite.id}`)
-					console.log(isItemFavorite);
 					setFavoriteItems(prev => prev.filter((item) => Number(item.itemId) !== Number(obj.id)));
 				} else {
 					const { data } = await axios.post('https://6d35450ae5876ee3.mokky.dev/favorites', {
@@ -56,7 +56,6 @@ function App() {
 						title: obj.title,
 						imageUrl: obj.imageUrl
 					});
-					console.log(data);
 					setFavoriteItems((prev) => [...prev, data]);
 				}
 		} catch (error) {
@@ -82,7 +81,9 @@ function App() {
 						setFavoriteItems,
 						onAddToFavotites,
 						onAddToCart,
-						isItemAdded
+						isItemAdded,
+						setDrawerOpen,
+						drawerOpen
 					}
 				}
       >
