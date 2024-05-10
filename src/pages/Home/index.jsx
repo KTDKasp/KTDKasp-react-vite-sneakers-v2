@@ -6,13 +6,10 @@ import { CardList } from '../../components/CardList';
 import AppContext from '../../context';
 
 import './Home.css';
-import Skeleton from '../../components/CardList/Skeleton';
 
 export const Home = () => {
 	const [sortType, setSortType] = React.useState('title');
 	const [searchValue, setSearchValue] = React.useState('');
-	const [isLoading, setIsLoading] = React.useState(true);
-	// const [inputValue, setInputValue] = React.useState('');
 
   const { items, setItems, onAddToFavotites, onAddToCart } = React.useContext(AppContext);
 
@@ -25,15 +22,14 @@ export const Home = () => {
 			params.title = `*${searchValue}*`;
 		}
 
+		// #TODO: сделать скелетон не при каждом обновлении
 		try {
-			setIsLoading(true);
 			const { data } = await axios.get(
 				`https://6d35450ae5876ee3.mokky.dev/items`,
 				{
 					params,
 				}
 			);
-			setIsLoading(false);
 			setItems(data);
 		} catch (error) {
 			console.log(`Hey, you have ${error}`);
@@ -89,13 +85,7 @@ export const Home = () => {
 				</div>
 			</div>
 			{
-				isLoading ? (
-					<div className='card-list'>
-						{[...Array(12)].map((_, index) => <Skeleton key={index} />)}
-					</div>
-				) : (
-					<CardList items={items} onAddToCart={onAddToCart} onAddToFavotites={onAddToFavotites}/>
-				)
+				<CardList items={items} onAddToCart={onAddToCart} onAddToFavotites={onAddToFavotites}/>
 			}
 		</div>
 	);
